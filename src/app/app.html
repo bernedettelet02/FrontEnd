@@ -1,4 +1,7 @@
-<p>testing</p>
-<h1>fsdfsd</h1>   
-<p>testing commit</p>
-<h3>tewst</h3>
+<h1>{{title}}</h1>
+<ul>
+    @for (member of members(); track member.id) {
+    <li>{{member.id}} - {{member.displayName}}</li>
+    }
+
+</ul>
