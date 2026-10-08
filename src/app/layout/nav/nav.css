@@ -1,0 +1,24 @@
+
+:host {
+  display: block;
+}
+
+.navbar {
+  background: linear-gradient(
+    110deg,
+    #071b3a 0%,
+    #123b70 65%,
+    #1b4d82 100%
+  );
+  border-bottom: 3px solid #d9b54a;
+}
+
+.navbar .menu a {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.navbar .menu a:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #f0cf62;
+}
