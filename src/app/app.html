@@ -1,13 +1,2 @@
-<app-nav></app-nav>
-
-<div class="p-6">
-  <h1 class="text-3xl font-bold">
-    {{ title() }}
-  </h1>
-
-  <ul>
-    @for (member of members(); track member.id) {
-      <li>{{ member.name }}</li>
-    }
-  </ul>
-</div>
+<app-nav/>
+<router-outlet></router-outlet>

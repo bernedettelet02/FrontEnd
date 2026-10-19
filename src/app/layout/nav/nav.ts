@@ -1,43 +1,37 @@
 
-
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AccountService } from '../../account-service';
+import { RouterLink } from '@angular/router';
+import { AccountService } from '../../../Core/account-service';
 
 @Component({
   selector: 'app-nav',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './nav.html',
   styleUrl: './nav.css',
 })
 export class Nav {
-  private accountService = inject(AccountService);
+  protected accountService = inject(AccountService);
+
   protected creds: any = {};
-  protected loggedIn = signal(false);
+  protected loggedIn = this.accountService.loggedIn;
+  protected userEmail = this.accountService.userEmail;
 
-
-
-  login() {
-     console.log('Login button clicked');
-  console.log('Credentials:', this.creds);
-
+  login(): void {
     this.accountService.login(this.creds).subscribe({
-      next: result => {
-        console.log('Login response:', result);
-        this.loggedIn.set(true);
+      next: () => {
+        // Update the UI only after the real API login succeeds.
+        this.accountService.setLoggedIn(this.creds.email);
       },
       error: error => {
         console.error('Login failed:', error);
-        alert('Login failed. Check the browser console.');
+        alert('Login failed. Check your credentials and try again.');
       },
     });
   }
 
-  logout() {
-    this.loggedIn.set(false);
+  logout(): void {
+    this.accountService.logout();
+    this.creds = {};
   }
-  testLogin() {
-  this.creds.email = 'demo@orantium.com';
-  this.loggedIn.set(true);
-}
 }
