@@ -1,0 +1,172 @@
+
+<main class="register-page">
+  <section class="register-layout">
+
+    <aside class="welcome-panel">
+      <a class="brand" routerLink="/" aria-label="Orantium home">
+        <span class="brand-mark">O</span>
+        <span>ORANTIUM <small>ADVISORY GROUP</small></span>
+      </a>
+
+      <div class="welcome-content">
+        <span class="eyebrow">YOUR NEXT CHAPTER STARTS HERE</span>
+        <h1>Build your business with confidence.</h1>
+        <p>
+          Connect with Orantium for professional support in logistics,
+          procurement and facilities management.
+        </p>
+
+        <div class="benefit">
+          <span class="check">✓</span>
+          <span>
+            <strong>Practical support</strong>
+            <small>Solutions shaped around your business needs.</small>
+          </span>
+        </div>
+
+        <div class="benefit">
+          <span class="check">✓</span>
+          <span>
+            <strong>Professional service</strong>
+            <small>Clear communication and customer-focused assistance.</small>
+          </span>
+        </div>
+      </div>
+
+      <p class="panel-footer">CLARITY. STRATEGY. GROWTH.</p>
+    </aside>
+
+    <section class="form-panel">
+      <header class="form-heading">
+        <span class="eyebrow">GET STARTED</span>
+        <h2>Create your account</h2>
+        <p>Enter your details below to register with Orantium.</p>
+      </header>
+
+      <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" novalidate>
+
+        <div class="form-field">
+          <label for="fullName">Full name <span>*</span></label>
+          <input
+            id="fullName"
+            name="fullName"
+            type="text"
+            [(ngModel)]="fullName"
+            #fullNameModel="ngModel"
+            placeholder="Enter your full name"
+            autocomplete="name"
+            required
+            [class.invalid]="fullNameModel.invalid && (fullNameModel.touched || submitted)"
+          />
+          @if (fullNameModel.invalid && (fullNameModel.touched || submitted)) {
+            <small class="field-error">Please enter your full name.</small>
+          }
+        </div>
+
+        <div class="form-field">
+          <label for="email">Email address <span>*</span></label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            [(ngModel)]="email"
+            #emailModel="ngModel"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+            email
+            [class.invalid]="emailModel.invalid && (emailModel.touched || submitted)"
+          />
+          @if (emailModel.invalid && (emailModel.touched || submitted)) {
+            <small class="field-error">Enter a valid email address.</small>
+          }
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="phone">Phone number <span>*</span></label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              [(ngModel)]="phone"
+              #phoneModel="ngModel"
+              placeholder="Phone number"
+              autocomplete="tel"
+              required
+              [class.invalid]="phoneModel.invalid && (phoneModel.touched || submitted)"
+            />
+            @if (phoneModel.invalid && (phoneModel.touched || submitted)) {
+              <small class="field-error">Enter your phone number.</small>
+            }
+          </div>
+
+          <div class="form-field">
+            <label for="company">Company <span class="optional">(optional)</span></label>
+            <input
+              id="company"
+              name="company"
+              type="text"
+              [(ngModel)]="company"
+              placeholder="Company name"
+              autocomplete="organization"
+            />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="password">Password <span>*</span></label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            [(ngModel)]="password"
+            #passwordModel="ngModel"
+            placeholder="At least 8 characters"
+            autocomplete="new-password"
+            minlength="8"
+            required
+            [class.invalid]="passwordModel.invalid && (passwordModel.touched || submitted)"
+          />
+          @if (passwordModel.invalid && (passwordModel.touched || submitted)) {
+            <small class="field-error">Password must contain at least 8 characters.</small>
+          }
+        </div>
+
+        <div class="form-field">
+          <label for="confirmPassword">Confirm password <span>*</span></label>
+          <input
+            id="confirmPassword"
+            name="confirmPassword"
+            type="password"
+            [(ngModel)]="confirmPassword"
+            #confirmPasswordModel="ngModel"
+            placeholder="Enter your password again"
+            autocomplete="new-password"
+            required
+            [class.invalid]="confirmPasswordModel.invalid && (confirmPasswordModel.touched || submitted) || (submitted && password !== confirmPassword)"
+          />
+          @if (confirmPasswordModel.invalid && (confirmPasswordModel.touched || submitted)) {
+            <small class="field-error">Please confirm your password.</small>
+          } @else if (submitted && password !== confirmPassword) {
+            <small class="field-error">Your passwords do not match.</small>
+          }
+        </div>
+
+        @if (errorMessage) {
+          <p class="form-message" role="alert">{{ errorMessage }}</p>
+        }
+
+        <button type="submit" class="register-button">
+          Create Account <span aria-hidden="true">→</span>
+        </button>
+
+        <p class="login-prompt">
+          Already have an account?
+          <a routerLink="/">Return to the homepage to log in</a>
+        </p>
+      </form>
+    </section>
+
+  </section>
+</main>

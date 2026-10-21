@@ -12,10 +12,10 @@ import { AccountService } from '../../../Core/account-service';
 })
 export class Nav {
   protected accountService = inject(AccountService);
-
   protected creds: any = {};
   protected loggedIn = this.accountService.loggedIn;
   protected userEmail = this.accountService.userEmail;
+
 
   login(): void {
     this.accountService.login(this.creds).subscribe({
